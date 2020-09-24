@@ -3,6 +3,10 @@ package bif3.swe1.oop;
 import bif3.swe1.oop.classes.ClassWithMembers;
 import bif3.swe1.oop.inheritance.BaseClass;
 import bif3.swe1.oop.inheritance.DerivedClass;
+import bif3.swe1.oop.polymorphism.abstractbaseclass.AbstractShape;
+import bif3.swe1.oop.polymorphism.abstractbaseclass.DerivedCircle;
+import bif3.swe1.oop.polymorphism.abstractbaseclass.DerivedCompoundShape;
+import bif3.swe1.oop.polymorphism.abstractbaseclass.DerivedLine;
 
 public class Main {
 
@@ -46,6 +50,28 @@ public class Main {
         // remark: no method-hiding here
         // calls overloaded method2 of derived class because of casting
         ((DerivedClass)bcdc).method2("sdf");
+
+        System.out.println("-----");
+
+        // Polymorphism with abstract base class
+        AbstractShape abstractLine = new DerivedLine(0, 1,1, 1);
+        abstractLine.showOrigin();
+        double abstractLinePerimeter = abstractLine.getPerimeter();
+
+        AbstractShape abstractCircle = new DerivedCircle(5, 5, 3);
+        abstractCircle.showOrigin();
+        double abstractCircleArea = abstractCircle.getArea();
+
+        DerivedCompoundShape derivedCompound = new DerivedCompoundShape(7, 7);
+        derivedCompound.add(abstractLine);
+        derivedCompound.add(abstractCircle);
+        derivedCompound.add(new DerivedLine(3, 4, 5, 6));
+        derivedCompound.showOrigin();
+        derivedCompound.printShapeType();
+
+        // casting works in IDE, but will throw an error at runtime if "line" is something else than a Line object
+        //AbstractShape shape = new DerivedCircle(0, 0, 1);
+        //DerivedLine line3 = (DerivedLine)shape;
 
         System.out.println("-----");
     }
