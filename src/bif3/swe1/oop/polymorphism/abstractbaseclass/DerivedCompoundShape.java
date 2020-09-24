@@ -5,7 +5,7 @@ import java.util.List;
 
 public class DerivedCompoundShape extends AbstractShape {
 
-    private List<AbstractShape> shapeList = new ArrayList<AbstractShape>();
+    private List<AbstractShape> shapeList = new ArrayList<>();
 
     public DerivedCompoundShape(int x, int y) {
         super(x, y);

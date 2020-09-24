@@ -7,6 +7,10 @@ import bif3.swe1.oop.polymorphism.abstractbaseclass.AbstractShape;
 import bif3.swe1.oop.polymorphism.abstractbaseclass.DerivedCircle;
 import bif3.swe1.oop.polymorphism.abstractbaseclass.DerivedCompoundShape;
 import bif3.swe1.oop.polymorphism.abstractbaseclass.DerivedLine;
+import bif3.swe1.oop.polymorphism.interfacebasedshapes.BetterCircle;
+import bif3.swe1.oop.polymorphism.interfacebasedshapes.BetterCompoundShape;
+import bif3.swe1.oop.polymorphism.interfacebasedshapes.BetterLine;
+import bif3.swe1.oop.polymorphism.interfacebasedshapes.BetterShapeCompositionInterface;
 
 public class Main {
 
@@ -74,5 +78,24 @@ public class Main {
         //DerivedLine line3 = (DerivedLine)shape;
 
         System.out.println("-----");
+
+        // Polymorphism with interfaces
+        BetterShapeCompositionInterface betterLine = new BetterLine(0, 1, 1, 1);
+        betterLine.showOrigin();
+        double betterLinePerimeter = betterLine.getPerimeter();
+
+        BetterShapeCompositionInterface betterCircle = new BetterCircle(5, 5, 3);
+        double betterCircleArea = betterCircle.getArea();
+        betterCircle.showOrigin();
+
+        BetterCompoundShape betterCompound = new BetterCompoundShape(7, 7);
+        betterCompound.add(betterLine);
+        betterCompound.add(betterCircle);
+        betterCompound.add(new BetterLine(3, 4, 5, 6));
+        betterCompound.showOrigin();
+        betterCompound.printShapeType();
+
+        System.out.println("-----");
+
     }
 }
