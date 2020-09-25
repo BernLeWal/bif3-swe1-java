@@ -11,6 +11,9 @@ import bif3.swe1.oop.polymorphism.interfacebasedshapes.BetterCircle;
 import bif3.swe1.oop.polymorphism.interfacebasedshapes.BetterCompoundShape;
 import bif3.swe1.oop.polymorphism.interfacebasedshapes.BetterLine;
 import bif3.swe1.oop.polymorphism.interfacebasedshapes.BetterShapeCompositionInterface;
+import bif3.swe1.oop.polymorphism.optimizedsolution.Circle;
+import bif3.swe1.oop.polymorphism.optimizedsolution.CompoundShape;
+import bif3.swe1.oop.polymorphism.optimizedsolution.Line;
 
 public class Main {
 
@@ -96,6 +99,22 @@ public class Main {
         betterCompound.printShapeType();
 
         System.out.println("-----");
+
+        // Very good solution for this usecase - Polymorphism with interfaces and a base class
+        Line line = new Line(0, 1, 1, 1);
+        line.showOrigin();
+        double linePerimeter = line.getPerimeter();
+
+        Circle circle = new Circle(5, 5, 3);
+        double circleArea = betterCircle.getArea();
+        betterCircle.showOrigin();
+
+        CompoundShape compoundShape = new CompoundShape(7, 7);
+        compoundShape.add(line);
+        compoundShape.add(circle);
+        compoundShape.add(new Line(3, 4, 5, 6));
+        compoundShape.showOrigin();
+        compoundShape.printShapeType();
 
     }
 }

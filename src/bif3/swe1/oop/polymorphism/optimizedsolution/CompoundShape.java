@@ -1,24 +1,25 @@
-package bif3.swe1.oop.polymorphism.abstractbaseclass;
+package bif3.swe1.oop.polymorphism.optimizedsolution;
+
+import bif3.swe1.oop.polymorphism.abstractbaseclass.AbstractShape;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class DerivedCompoundShape extends AbstractShape {
+public class CompoundShape extends Shape implements ShapeCompositionInterface {
+    private List<ShapeCompositionInterface> shapeList = new ArrayList<>();
 
-    private List<AbstractShape> shapeList = new ArrayList<>();
-
-    public DerivedCompoundShape(int x, int y) {
+    public CompoundShape(int x, int y) {
         super(x, y);
     }
 
-    public void add(AbstractShape shape) {
+    public void add(ShapeCompositionInterface shape) {
         shapeList.add(shape);
     }
 
     @Override
     public double getArea() {
         double tempArea = 0;
-        for( AbstractShape shape : shapeList ) {
+        for( ShapeCompositionInterface shape : shapeList ) {
             tempArea += shape.getArea();
         }
         System.out.printf("Sum of all areas: %d \n", tempArea);
@@ -28,7 +29,7 @@ public class DerivedCompoundShape extends AbstractShape {
     @Override
     public double getPerimeter() {
         double tempPerimeter = 0;
-        for (AbstractShape shape : shapeList) {
+        for (ShapeCompositionInterface shape : shapeList) {
             tempPerimeter += shape.getPerimeter();
         }
         System.out.printf("Sum of all perimeters: %d \n", tempPerimeter);
@@ -38,7 +39,7 @@ public class DerivedCompoundShape extends AbstractShape {
     @Override
     public void printShapeType() {
         System.out.println("I'm a CompoundShape");
-        for(AbstractShape shape : shapeList) {
+        for(ShapeCompositionInterface shape : shapeList) {
             shape.printShapeType();
         }
     }
