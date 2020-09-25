@@ -27,13 +27,32 @@ public class ClassWithMembers {
     public final int readOnlyInt = 0;
     public final int readOnlyInt2;
 
+    // property with getters & setters
+    private int intProperty;
+
+    public int getIntProperty() {
+        return intProperty;
+    }
+
+    public void setIntProperty(int intProperty) {
+        this.intProperty = intProperty;
+    }
+
     // full auto property - thx to lombok-library
     @Getter
     @Setter
-    private int intProperty;
+    private int nicerIntProperty;
+
     // property without setter but with default value
+    private int readProperty;
+
+    public int getReadProperty() {
+        return readProperty;
+    }
+
+    // auto property with lombok
     @Getter
-    private int readProperty = 0;
+    private int nicerReadProperty = 0;
 
     // only accessable in derived classes
     protected String protectedString = "default";
@@ -65,4 +84,5 @@ public class ClassWithMembers {
     private void changeValue(int x, int y) {
         privateVariable = x + y;
     }
+
 }
