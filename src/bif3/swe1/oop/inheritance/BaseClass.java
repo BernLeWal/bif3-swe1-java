@@ -8,4 +8,8 @@ public class BaseClass {
     public final void method2() {
         System.out.println("method2 BaseClass");
     }
+
+    public void method3() {
+        System.out.println("method3 BaseClass");
+    }
 }

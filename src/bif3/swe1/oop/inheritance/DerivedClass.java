@@ -17,4 +17,11 @@ public class DerivedClass extends BaseClass {
     public void method2(String parameterString) {
         System.out.println("method2 param DerivedClass " + parameterString);
     }
+
+    @Override
+    public void method3() {
+        System.out.println("method3 DerivedClass - before");
+        super.method3();
+        System.out.println("method3 DerivedClass - after");
+    }
 }

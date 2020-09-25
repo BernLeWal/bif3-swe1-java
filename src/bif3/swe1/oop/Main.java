@@ -58,6 +58,10 @@ public class Main {
         // calls overloaded method2 of derived class because of casting
         ((DerivedClass)bcdc).method2("sdf");
 
+        // runtime polymorphism
+        // calls method3 of derived class because of implicit-virtual/override
+        bcdc.method3();
+
         System.out.println("-----");
 
         // Polymorphism with abstract base class
