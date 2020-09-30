@@ -14,6 +14,9 @@ import bif3.swe1.oop.polymorphism.interfacebasedshapes.BetterShapeCompositionInt
 import bif3.swe1.oop.polymorphism.optimizedsolution.Circle;
 import bif3.swe1.oop.polymorphism.optimizedsolution.CompoundShape;
 import bif3.swe1.oop.polymorphism.optimizedsolution.Line;
+import bif3.swe1.oop.polymorphism.optimizedsolution.ShapeCompositionInterface;
+import bif3.swe1.oop.shapestackgit.ShapeStack;
+import bif3.swe1.oop.shapestackgit.ShapeStackInterface;
 
 public class Main {
 
@@ -120,5 +123,23 @@ public class Main {
         compoundShape.showOrigin();
         compoundShape.printShapeType();
 
+        System.out.println("-----");
+
+        ShapeStackInterface shapeStack = new ShapeStack(5);
+        shapeStack.push(line);
+        System.out.printf("Is empty? %s\n", shapeStack.isEmpty());
+
+        if( !shapeStack.isEmpty()) {
+            shapeStack.describeStack();
+        }
+
+        System.out.println("-----");
+
+        ShapeCompositionInterface poppedShape = shapeStack.pop();
+        System.out.println("Following shape was popped from stack:");
+        poppedShape.printShapeType();
+        System.out.printf("Is stack empty? %s\n", shapeStack.isEmpty());
+
+        System.out.println("-----");
     }
 }
