@@ -5,7 +5,7 @@ import lombok.Getter;
 import lombok.ToString;
 
 @ToString
-public abstract class LightsaberFighter implements Fightable {
+public abstract class LightsaberFighter implements FighterInterface {
 
     @Getter
     private String name;

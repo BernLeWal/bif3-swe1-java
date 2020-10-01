@@ -6,26 +6,20 @@ import lombok.ToString;
 
 @ToString
 public class Lightsaber {
-    public enum Color {
-        NONE,   // when the lightsaber is not used
-        GREEN,  // Jedi Knight Luke Skywalker
-        RED,    // Sith Lord Darth Vader
-        BLUE    // Jedi Master Yoda
-    }
 
     @Getter
-    private Color color;
+    private LightsaberColor color;
 
     public Lightsaber() {
-        color = Color.NONE;
+        color = LightsaberColor.NONE;
     }
 
     public void setBelongTo(String fighter) {
         color = switch( fighter ) {
-            case "Luke" -> Color.GREEN;
-            case "Darth" -> Color.RED;
-            case "Yoda" -> Color.BLUE;
-            default -> Color.NONE;
+            case "Luke" -> LightsaberColor.GREEN;
+            case "Darth" -> LightsaberColor.RED;
+            case "Yoda" -> LightsaberColor.BLUE;
+            default -> LightsaberColor.NONE;
         };
     }
 }

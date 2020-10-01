@@ -1,6 +1,6 @@
 package bif3.swe1.tdd.combat;
 
-import bif3.swe1.tdd.fighter.Fightable;
+import bif3.swe1.tdd.fighter.FighterInterface;
 import bif3.swe1.tdd.fighter.LightsaberFighter;
 
 import java.util.Optional;
@@ -19,8 +19,8 @@ public class Combat {
         System.out.println("Let the fight begin!");
         int turn = 1;
         while( !isFightOver() ) {
-            Fightable.Aim aimA = opponentA.nextAim();
-            Fightable.Aim aimB = opponentB.nextAim();
+            FighterInterface.Aim aimA = opponentA.nextAim();
+            FighterInterface.Aim aimB = opponentB.nextAim();
             System.out.printf("%d.turn: %s <---> %s  \n", turn++, aimA, aimB);
 
             gameMechanics(aimA, aimB);
@@ -36,8 +36,8 @@ public class Combat {
         System.out.printf("%s fights agains %s\n", opponentA.getName(), opponentB.getName());
         System.out.println("Let the fight begin!");
         for( int turn = 1; turn<turns && !isFightOver(); turn++ ) {
-            Fightable.Aim aimA = opponentA.nextAim();
-            Fightable.Aim aimB = opponentB.nextAim();
+            FighterInterface.Aim aimA = opponentA.nextAim();
+            FighterInterface.Aim aimB = opponentB.nextAim();
             System.out.printf("%d.turn: %s <---> %s  \n", turn, aimA, aimB);
 
             gameMechanics(aimA, aimB);
@@ -49,34 +49,34 @@ public class Combat {
             System.out.printf("The winner is %s \n", optWinner.get().getName());
     }
 
-    private void gameMechanics(Fightable.Aim aimA, Fightable.Aim aimB) {
-        if( aimA == Fightable.Aim.ATTACK ) {
-            if( aimB == Fightable.Aim.ATTACK ) {
+    private void gameMechanics(FighterInterface.Aim aimA, FighterInterface.Aim aimB) {
+        if( aimA == FighterInterface.Aim.ATTACK ) {
+            if( aimB == FighterInterface.Aim.ATTACK ) {
                 opponentA.changeVitality(-1);
                 opponentB.changeVitality(-1);
             }
-            else if( aimB == Fightable.Aim.DEFENSE ) {
+            else if( aimB == FighterInterface.Aim.DEFENSE ) {
                 opponentA.changeVitality(-2);
             }
             else { // REST
                 opponentB.changeVitality(-2);
             }
-        } else if( aimA == Fightable.Aim.DEFENSE ) {
-            if( aimB == Fightable.Aim.ATTACK ) {
+        } else if( aimA == FighterInterface.Aim.DEFENSE ) {
+            if( aimB == FighterInterface.Aim.ATTACK ) {
                 opponentB.changeVitality(-2);
             }
-            else if( aimB == Fightable.Aim.DEFENSE ) {
+            else if( aimB == FighterInterface.Aim.DEFENSE ) {
                 opponentA.changeVitality(-1);
                 opponentB.changeVitality(-1);
             }
             else { // REST
                 opponentB.changeVitality(+1);
             }
-        } else if( aimA == Fightable.Aim.REST ) {
-            if( aimB == Fightable.Aim.ATTACK ) {
+        } else if( aimA == FighterInterface.Aim.REST ) {
+            if( aimB == FighterInterface.Aim.ATTACK ) {
                 opponentA.changeVitality(-2);
             }
-            else if( aimB == Fightable.Aim.DEFENSE ) {
+            else if( aimB == FighterInterface.Aim.DEFENSE ) {
                 opponentA.changeVitality(+1);
             }
             else { // REST

@@ -24,9 +24,9 @@ class FixtureLightsaberTest {
     @Test
     @DisplayName("Lightsaber fighters should get their corresponding color")
     void testGetColor_ShouldHaveRightColor() {
-        assertSame(lightsaberOfLuke.getColor(), Lightsaber.Color.GREEN, "Lukes lightsaber color should be GREEN");
-        assertSame(lightsaberOfDarth.getColor(), Lightsaber.Color.RED, "Darths lightsaber color should be RED");
-        assertEquals( unusedLightsaber.getColor(), Lightsaber.Color.NONE, "For unused lightsabers the color should be NONE");
+        assertSame(lightsaberOfLuke.getColor(), LightsaberColor.GREEN, "Lukes lightsaber color should be GREEN");
+        assertSame(lightsaberOfDarth.getColor(), LightsaberColor.RED, "Darths lightsaber color should be RED");
+        assertEquals( unusedLightsaber.getColor(), LightsaberColor.NONE, "For unused lightsabers the color should be NONE");
     }
 
     @Test
@@ -34,9 +34,9 @@ class FixtureLightsaberTest {
     @DisplayName("Lightsaber fighters should get their corresponding color - always check all")
     void testGetColor_ShouldHaveRightColor_testAll() {
         assertAll( "colors",
-                ()-> assertSame(lightsaberOfLuke.getColor(), Lightsaber.Color.GREEN, "Lukes lightsaber color should be GREEN"),
-                ()-> assertSame(lightsaberOfDarth.getColor(), Lightsaber.Color.RED, "Darths lightsaber color should be RED"),
-                ()->assertEquals( unusedLightsaber.getColor(), Lightsaber.Color.NONE, "For unused lightsabers the color should be NONE")
+                ()-> assertSame(lightsaberOfLuke.getColor(), LightsaberColor.GREEN, "Lukes lightsaber color should be GREEN"),
+                ()-> assertSame(lightsaberOfDarth.getColor(), LightsaberColor.RED, "Darths lightsaber color should be RED"),
+                ()->assertEquals( unusedLightsaber.getColor(), LightsaberColor.NONE, "For unused lightsabers the color should be NONE")
         );
     }
 
