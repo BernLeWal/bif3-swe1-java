@@ -1,7 +1,7 @@
 package bif3.swe1.tdd;
 
 import bif3.swe1.tdd.combat.Combat;
-import bif3.swe1.tdd.fighter.Darth;
+import bif3.swe1.tdd.fighter.DarthVader;
 import bif3.swe1.tdd.fighter.LightsaberFighter;
 import bif3.swe1.tdd.fighter.Luke;
 import bif3.swe1.tdd.fighter.Yoda;
@@ -11,9 +11,9 @@ import java.util.Optional;
 public class Main {
     public static void main(String[] args) {
         Luke luke = new Luke();
-        Darth darth = new Darth();
+        DarthVader darthVader = new DarthVader();
 
-        Combat combat1 = new Combat(luke, darth);
+        Combat combat1 = new Combat(luke, darthVader);
         combat1.fightForLifeAndDeath();
 
         System.out.println("--------");
