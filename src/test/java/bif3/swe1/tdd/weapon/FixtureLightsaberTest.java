@@ -9,6 +9,11 @@ class FixtureLightsaberTest {
     Lightsaber lightsaberOfDarth;
     Lightsaber unusedLightsaber;
 
+    @BeforeAll
+    void init() {
+        System.out.println("initialize - @BeforeAll");
+    }
+
     @BeforeEach
     void setUp() {
         lightsaberOfLuke = new Lightsaber();
@@ -45,5 +50,10 @@ class FixtureLightsaberTest {
         // clean-up work
         lightsaberOfLuke.setBelongTo("");
         lightsaberOfDarth.setBelongTo("");
+    }
+
+    @AfterAll
+    void terminate() {
+        System.out.println("terminate - @AfterAll");
     }
 }
