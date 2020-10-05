@@ -48,7 +48,7 @@
                     </dependency>
                 </dependencies>
                 <configuration>
-                    <argLine>--enable-preview</argLine>
+                    <argLine>--enable-preview --add-opens bif3.swe1.java/bif3.swe1.tdd.weapon=ALL-UNNAMED</argLine>
                 </configuration>
             </plugin>
         </plugins>
@@ -59,7 +59,7 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>${lombok-version}</version>
-            <scope>provided</scope>
+            <optional>true</optional>
         </dependency>
         <dependency>
             <groupId>org.mapstruct</groupId>

@@ -19,11 +19,11 @@ class SimpleLightsaberTest {
     void testGetColor_DarthShouldBeRed() {
         Lightsaber lightsaber = new Lightsaber();
         lightsaber.setBelongTo("Darth");
-        assertFalse( lightsaber.getColor() == LightsaberColor.RED, "Darths lightsaber color should be RED" );
+        assertFalse( lightsaber.getColor() != LightsaberColor.RED, "Darths lightsaber color should be RED" );
     }
 
     @Test
-    @Disabled
+    //@Disabled
     @DisplayName("Unknown fighters should not use the lightsaber, color NONE")
     void testGetColor_WrongFighterShouldBeNone() {
         Lightsaber lightsaber = new Lightsaber();

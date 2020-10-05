@@ -10,7 +10,7 @@ class FixtureLightsaberTest {
     Lightsaber unusedLightsaber;
 
     @BeforeAll
-    void init() {
+    static void init() {
         System.out.println("initialize - @BeforeAll");
     }
 
@@ -35,7 +35,7 @@ class FixtureLightsaberTest {
     }
 
     @Test
-    @Disabled("Will be working in the next release...")
+    //Disabled("Will be working in the next release...")
     @DisplayName("Lightsaber fighters should get their corresponding color - always check all")
     void testGetColor_ShouldHaveRightColor_testAll() {
         assertAll( "colors",
@@ -53,7 +53,7 @@ class FixtureLightsaberTest {
     }
 
     @AfterAll
-    void terminate() {
+    static void terminate() {
         System.out.println("terminate - @AfterAll");
     }
 }
