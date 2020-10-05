@@ -14,17 +14,11 @@ public class Lightsaber {
     }
 
     public void setBelongTo(String fighter) {
-        switch( fighter ) {
-            case "Luke": color = LightsaberColor.GREEN; break;
-            case "Darth": color = LightsaberColor.RED; break;
-            case "Yoda": color = LightsaberColor.BLUE; break;
-            default: color = LightsaberColor.NONE;
-        }
-//        color = switch( fighter ) {
-//            case "Luke" -> LightsaberColor.GREEN;
-//            case "Darth" -> LightsaberColor.RED;
-//            case "Yoda" -> LightsaberColor.BLUE;
-//            default -> LightsaberColor.NONE;
-//        };
+        color = switch( fighter ) {
+            case "Luke" -> LightsaberColor.GREEN;
+            case "Darth" -> LightsaberColor.RED;
+            case "Yoda" -> LightsaberColor.BLUE;
+            default -> LightsaberColor.NONE;
+        };
     }
 }
