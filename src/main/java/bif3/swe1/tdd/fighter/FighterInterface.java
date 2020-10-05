@@ -1,12 +1,6 @@
 package bif3.swe1.tdd.fighter;
 
 public interface FighterInterface {
-    enum Aim {
-        ATTACK,
-        DEFENSE,
-        REST
-    }
-
     Aim nextAim();
 
     int getVitality();
