@@ -4,6 +4,8 @@ public interface FighterInterface {
     Aim nextAim();
 
     int getVitality();
+
     void changeVitality(int change);
+
     boolean isDead();
 }

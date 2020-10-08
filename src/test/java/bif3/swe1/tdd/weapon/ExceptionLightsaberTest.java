@@ -9,9 +9,7 @@ class ExceptionLightsaberTest {
     @Test
     void testSetBelongsTo_NullPointerException() {
         Lightsaber lightsaber = new Lightsaber();
-        assertThrows(NullPointerException.class, () -> {
-            lightsaber.setBelongTo(null);
-        }, "Should throw exception");
+        assertThrows(NullPointerException.class, () -> lightsaber.setBelongTo(null), "Should throw exception");
 
     }
 

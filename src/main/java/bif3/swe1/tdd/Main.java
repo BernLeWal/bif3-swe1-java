@@ -19,7 +19,7 @@ public class Main {
         System.out.println("--------");
 
         Optional<LightsaberFighter> winner = combat1.getWinner();
-        if( !winner.isEmpty() ) {
+        if (!winner.isEmpty()) {
             Yoda yoda = new Yoda();
 
             Combat combat2 = new Combat(yoda, winner.get());
