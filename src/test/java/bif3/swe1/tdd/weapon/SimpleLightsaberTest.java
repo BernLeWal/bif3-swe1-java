@@ -10,9 +10,16 @@ class SimpleLightsaberTest {
 
     @Test
     void testGetColor_LukeShouldBeGreen() {
+        // arrange
         Lightsaber lightsaber = new Lightsaber();
         lightsaber.setBelongTo("Luke");
-        assertTrue( lightsaber.getColor() == LightsaberColor.GREEN, "Lukes lightsaber color should be GREEN" );
+
+        // act
+        LightsaberColor actualColor = lightsaber.getColor();
+        LightsaberColor expectedColor = LightsaberColor.GREEN;
+
+        // assert
+        assertTrue( actualColor == expectedColor, "Lukes lightsaber color should be GREEN" );
     }
 
     @Test

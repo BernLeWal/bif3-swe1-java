@@ -23,7 +23,7 @@ public class Main {
             Yoda yoda = new Yoda();
 
             Combat combat2 = new Combat(yoda, winner.get());
-            combat2.limitedFight(10);
+            combat2.regularFight(10);
         }
     }
 }

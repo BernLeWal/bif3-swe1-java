@@ -6,8 +6,8 @@ import bif3.swe1.tdd.fighter.LightsaberFighter;
 import java.util.Optional;
 
 public class Combat {
-    private final LightsaberFighter opponentA;
-    private final LightsaberFighter opponentB;
+    private LightsaberFighter opponentA;
+    private LightsaberFighter opponentB;
 
     public Combat(LightsaberFighter opponentA, LightsaberFighter opponentB) {
         this.opponentA = opponentA;
@@ -25,14 +25,13 @@ public class Combat {
 
             gameMechanics(aimA, aimB);
         }
-        Optional<LightsaberFighter> optWinner = getWinner();
-        if (optWinner.isEmpty())
-            System.out.println("There is no winner");
-        else
-            System.out.printf("The winner is %s \n", optWinner.get().getName());
+        printWinner();
     }
 
-    public void limitedFight(int turns) {
+    public void regularFight(int turns) {
+        if( turns < 1 )
+            throw new IllegalArgumentException("Number of turns must be greater than 0!");
+
         System.out.printf("%s fights agains %s\n", opponentA.getName(), opponentB.getName());
         System.out.println("Let the fight begin!");
         for (int turn = 1; turn < turns && isFighting(); turn++) {
@@ -42,14 +41,10 @@ public class Combat {
 
             gameMechanics(aimA, aimB);
         }
-        Optional<LightsaberFighter> optWinner = getWinner();
-        if (optWinner.isEmpty())
-            System.out.println("There is no winner");
-        else
-            System.out.printf("The winner is %s \n", optWinner.get().getName());
+        printWinner();
     }
 
-    private void gameMechanics(Aim aimA, Aim aimB) {
+    public void gameMechanics(Aim aimA, Aim aimB) {
         if (aimA == Aim.ATTACK) {
             if (aimB == Aim.ATTACK) {
                 opponentA.changeVitality(-1);
@@ -96,5 +91,13 @@ public class Combat {
         if (opponentA.getVitality() == opponentB.getVitality())
             return Optional.empty();    // both equal - still no winner
         return Optional.of((opponentA.getVitality() > opponentB.getVitality()) ? opponentA : opponentB);
+    }
+
+    public void printWinner() {
+        Optional<LightsaberFighter> optWinner = getWinner();
+        if (optWinner.isEmpty())
+            System.out.println("There is no winner");
+        else
+            System.out.printf("The winner is %s \n", optWinner.get().getName());
     }
 }
