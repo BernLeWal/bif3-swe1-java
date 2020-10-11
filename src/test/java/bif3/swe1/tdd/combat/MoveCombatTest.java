@@ -1,10 +1,13 @@
 package bif3.swe1.tdd.combat;
 
 import bif3.swe1.tdd.fighter.Aim;
-import bif3.swe1.tdd.fighter.LightsaberFighter;
+import bif3.swe1.tdd.fighter.FighterInterface;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.mockito.Mockito.*;
 
@@ -17,17 +20,20 @@ import static org.mockito.Mockito.*;
   to the two opponents.
   The behaviour of Combat.gameMechanics() is recorded and evaluated.
  */
-class GameMechCombatTest {
-    Combat combat;
-    LightsaberFighter mockedA;
-    LightsaberFighter mockedB;
+@ExtendWith(MockitoExtension.class)
+class MoveCombatTest {
+    BaseCombat combat;
+    @Mock FighterInterface mockedA;    // a Mock object for opponentA is created
+    @Mock FighterInterface mockedB;    // a Mock object for opponentB is created
 
     @BeforeEach
     void setUp() {
         // arrange
-        mockedA = mock(LightsaberFighter.class);    // a Mock object for opponentA is created
-        mockedB = mock(LightsaberFighter.class);    // a Mock object for opponentB is created
-        combat = new Combat(mockedA, mockedB);
+
+        // Uncomment the following lines when not using the @Mock annotations
+        //mockedA = mock(LightsaberFighter.class);
+        //mockedB = mock(LightsaberFighter.class);
+        combat = new BaseCombat(mockedA, mockedB);
 
         // Once created, a mock will remember all interactions. Then you can selectively verify whatever interactions you are interested in.
     }
@@ -36,7 +42,7 @@ class GameMechCombatTest {
     @DisplayName("Attack:Attack -> -1:-1")
     void testGameMechanics_AttackAttack() {
         // act
-        combat.gameMechanics(Aim.ATTACK, Aim.ATTACK);   // the game-mechs for one round is applied
+        combat.move(Aim.ATTACK, Aim.ATTACK);   // the game-mechs for one round is applied
 
         // assert
                                                     // now check if the vitality of the opponents was
@@ -47,7 +53,7 @@ class GameMechCombatTest {
     @Test
     @DisplayName("Attack:Defense -> -2:0")
     void testGameMechanics_AttackDefense() {
-        combat.gameMechanics(Aim.ATTACK, Aim.DEFENSE);
+        combat.move(Aim.ATTACK, Aim.DEFENSE);
         verify(mockedA).changeVitality(-2);
         verify(mockedB, never()).changeVitality(0); // check, that changeVitality() was not called
     }
@@ -55,7 +61,7 @@ class GameMechCombatTest {
     @Test
     @DisplayName("Attack:Rest -> 0:-2")
     void testGameMechanics_AttackRest() {
-        combat.gameMechanics(Aim.ATTACK, Aim.REST);
+        combat.move(Aim.ATTACK, Aim.REST);
         verify(mockedA, never()).changeVitality(0);
         verify(mockedB).changeVitality(-2);
     }
@@ -97,7 +103,7 @@ class GameMechCombatTest {
     }
 
     private void testGameMechanics(Aim aimA, Aim aimB, int deltaA, int deltaB) {
-        combat.gameMechanics(aimA, aimB);
+        combat.move(aimA, aimB);
         if (deltaA!=0)
             verify(mockedA).changeVitality(deltaA);
         else

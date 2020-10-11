@@ -1,12 +1,12 @@
 package bif3.swe1.tdd.combat;
 
 import bif3.swe1.tdd.fighter.LightsaberFighter;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Optional;
 
@@ -23,16 +23,15 @@ import static org.mockito.Mockito.when;
  Once stubbed, the method will always return a stubbed value, regardless of how many times it is called.
  Last stubbing is more important - when you stubbed the same method with the same arguments many times.
  */
+@ExtendWith(MockitoExtension.class)
 class WinnerCombatTest {
-    Combat combat;
-    LightsaberFighter mockedA;
-    LightsaberFighter mockedB;
+    BaseCombat combat;
+    @Mock LightsaberFighter mockedA;
+    @Mock LightsaberFighter mockedB;
 
     @BeforeEach
     void setUp() {
-        mockedA = mock(LightsaberFighter.class);
-        mockedB = mock(LightsaberFighter.class);
-        combat = new Combat(mockedA, mockedB);
+        combat = new BaseCombat(mockedA, mockedB);
     }
 
     @Test

@@ -1,50 +1,21 @@
 package bif3.swe1.tdd.combat;
 
 import bif3.swe1.tdd.fighter.Aim;
-import bif3.swe1.tdd.fighter.LightsaberFighter;
+import bif3.swe1.tdd.fighter.FighterInterface;
 
 import java.util.Optional;
 
-public class Combat {
-    private LightsaberFighter opponentA;
-    private LightsaberFighter opponentB;
+public class BaseCombat implements CombatInterface {
+    protected FighterInterface opponentA;
+    protected FighterInterface opponentB;
 
-    public Combat(LightsaberFighter opponentA, LightsaberFighter opponentB) {
+    protected BaseCombat(FighterInterface opponentA, FighterInterface opponentB) {
         this.opponentA = opponentA;
         this.opponentB = opponentB;
     }
 
-    public void fightForLifeAndDeath() {
-        System.out.printf("%s fights agains %s\n", opponentA.getName(), opponentB.getName());
-        System.out.println("Let the fight begin!");
-        int turn = 1;
-        while (isFighting()) {
-            Aim aimA = opponentA.nextAim();
-            Aim aimB = opponentB.nextAim();
-            System.out.printf("%d.turn: %s <---> %s  \n", turn++, aimA, aimB);
-
-            gameMechanics(aimA, aimB);
-        }
-        printWinner();
-    }
-
-    public void regularFight(int turns) {
-        if( turns < 1 )
-            throw new IllegalArgumentException("Number of turns must be greater than 0!");
-
-        System.out.printf("%s fights agains %s\n", opponentA.getName(), opponentB.getName());
-        System.out.println("Let the fight begin!");
-        for (int turn = 1; turn < turns && isFighting(); turn++) {
-            Aim aimA = opponentA.nextAim();
-            Aim aimB = opponentB.nextAim();
-            System.out.printf("%d.turn: %s <---> %s  \n", turn, aimA, aimB);
-
-            gameMechanics(aimA, aimB);
-        }
-        printWinner();
-    }
-
-    public void gameMechanics(Aim aimA, Aim aimB) {
+    @Override
+    public void move(Aim aimA, Aim aimB) {
         if (aimA == Aim.ATTACK) {
             if (aimB == Aim.ATTACK) {
                 opponentA.changeVitality(-1);
@@ -79,7 +50,7 @@ public class Combat {
         return !opponentA.isDead() && !opponentB.isDead();
     }
 
-    public Optional<LightsaberFighter> getWinner() {
+    public Optional<FighterInterface> getWinner() {
         if (opponentA.isDead() && opponentB.isDead())
             return Optional.empty();    // all are dead - no winner
 
@@ -94,7 +65,7 @@ public class Combat {
     }
 
     public void printWinner() {
-        Optional<LightsaberFighter> optWinner = getWinner();
+        Optional<FighterInterface> optWinner = getWinner();
         if (optWinner.isEmpty())
             System.out.println("There is no winner");
         else

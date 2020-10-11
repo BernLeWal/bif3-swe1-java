@@ -8,4 +8,6 @@ public interface FighterInterface {
     void changeVitality(int change);
 
     boolean isDead();
+
+    String getName();
 }
