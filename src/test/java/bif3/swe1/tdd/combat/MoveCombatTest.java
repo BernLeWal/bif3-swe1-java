@@ -22,45 +22,51 @@ import static org.mockito.Mockito.*;
  */
 @ExtendWith(MockitoExtension.class)
 class MoveCombatTest {
+    @Mock FighterInterface mockedA;
+    @Mock FighterInterface mockedB;
     BaseCombat combat;
-    @Mock FighterInterface mockedA;    // a Mock object for opponentA is created
-    @Mock FighterInterface mockedB;    // a Mock object for opponentB is created
 
     @BeforeEach
     void setUp() {
         // arrange
-
-        // Uncomment the following lines when not using the @Mock annotations
-        //mockedA = mock(LightsaberFighter.class);
-        //mockedB = mock(LightsaberFighter.class);
         combat = new BaseCombat(mockedA, mockedB);
-
-        // Once created, a mock will remember all interactions. Then you can selectively verify whatever interactions you are interested in.
     }
 
     @Test
     @DisplayName("Attack:Attack -> -1:-1")
-    void testGameMechanics_AttackAttack() {
+    void testMove_Attack2Attack() {
+        // arrange
+        mockedA = mock(FighterInterface.class);
+        mockedB = mock(FighterInterface.class);
+        // Once created, a mock will remember all interactions.
+        // Then you can selectively verify whatever interactions you are interested in.
+        combat = new BaseCombat(mockedA, mockedB);
+
         // act
-        combat.move(Aim.ATTACK, Aim.ATTACK);   // the game-mechs for one round is applied
+        combat.move(Aim.ATTACK, Aim.ATTACK);    // the game-mechs for one round is applied
 
         // assert
-                                                    // now check if the vitality of the opponents was
-        verify(mockedA).changeVitality(-1);         // modified the right way
-        verify(mockedB).changeVitality(-1);
+        verify(mockedA).changeVitality(-1);     // now check if the vitality of the opponents
+        verify(mockedB).changeVitality(-1);     // were modified the right way
     }
 
     @Test
     @DisplayName("Attack:Defense -> -2:0")
-    void testGameMechanics_AttackDefense() {
+    void testMove_Attack2Defense() {
         combat.move(Aim.ATTACK, Aim.DEFENSE);
         verify(mockedA).changeVitality(-2);
         verify(mockedB, never()).changeVitality(0); // check, that changeVitality() was not called
+
+        // How this would look like with EasyMock
+//        expect(mockedA.changeVitality(-2));
+//        replay(mockedA);
+//        combat.move(Aim.ATTACK, Aim.DEFENSE);
+//        verify(mockedA);
     }
 
     @Test
     @DisplayName("Attack:Rest -> 0:-2")
-    void testGameMechanics_AttackRest() {
+    void testMove_Attack2Rest() {
         combat.move(Aim.ATTACK, Aim.REST);
         verify(mockedA, never()).changeVitality(0);
         verify(mockedB).changeVitality(-2);
@@ -68,41 +74,41 @@ class MoveCombatTest {
 
     @Test
     @DisplayName("Defense:Attack -> 0:-2")
-    void testGameMechanics_DefenseAttack() {
-        testGameMechanics(Aim.DEFENSE, Aim.ATTACK, 0, -2);
+    void testMove_DefenseAttack() {
+        testMove(Aim.DEFENSE, Aim.ATTACK, 0, -2);
     }
 
     @Test
     @DisplayName("Defense:Defense -> -1:-1")
-    void testGameMechanics_DefenseDefense() {
-        testGameMechanics(Aim.DEFENSE, Aim.DEFENSE, -1, -1);
+    void testMove_DefenseDefense() {
+        testMove(Aim.DEFENSE, Aim.DEFENSE, -1, -1);
     }
 
     @Test
     @DisplayName("Defense:Rest -> 0:+1")
-    void testGameMechanics_DefenseRest() {
-        testGameMechanics(Aim.DEFENSE, Aim.REST, 0, +1);
+    void testMove_DefenseRest() {
+        testMove(Aim.DEFENSE, Aim.REST, 0, +1);
     }
 
     @Test
     @DisplayName("Rest:Attack -> -2:0")
-    void testGameMechanics_RestAttack() {
-        testGameMechanics(Aim.REST, Aim.ATTACK, -2, 0);
+    void testMove_RestAttack() {
+        testMove(Aim.REST, Aim.ATTACK, -2, 0);
     }
 
     @Test
     @DisplayName("Rest:Defense -> +1:0")
-    void testGameMechanics_RestDefense() {
-        testGameMechanics(Aim.REST, Aim.DEFENSE, +1, 0);
+    void testMove_RestDefense() {
+        testMove(Aim.REST, Aim.DEFENSE, +1, 0);
     }
 
     @Test
     @DisplayName("Rest:Rest -> +1:+1")
-    void testGameMechanics_RestRest() {
-        testGameMechanics(Aim.REST, Aim.REST, +1, +1);
+    void testMove_RestRest() {
+        testMove(Aim.REST, Aim.REST, +1, +1);
     }
 
-    private void testGameMechanics(Aim aimA, Aim aimB, int deltaA, int deltaB) {
+    private void testMove(Aim aimA, Aim aimB, int deltaA, int deltaB) {
         combat.move(aimA, aimB);
         if (deltaA!=0)
             verify(mockedA).changeVitality(deltaA);

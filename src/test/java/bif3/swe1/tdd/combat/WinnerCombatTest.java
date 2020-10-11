@@ -36,7 +36,7 @@ class WinnerCombatTest {
 
     @Test
     @DisplayName("0:0 -> No winner(both dead)")
-    void getWinner_Dead2Dead() {
+    void testGetWinner_Dead2Dead() {
         when(mockedA.getVitality()).thenReturn(0);
         when(mockedB.getVitality()).thenReturn(0);
         assertEquals(Optional.empty(), combat.getWinner(), "There should not be a winner!");
@@ -44,7 +44,7 @@ class WinnerCombatTest {
 
     @Test
     @DisplayName("1:1 -> No winner(equal)")
-    void getWinner_one2one() {
+    void testGetWinner_one2one() {
         when(mockedA.getVitality()).thenReturn(1);
         when(mockedB.getVitality()).thenReturn(1);
         assertEquals(Optional.empty(), combat.getWinner(), "There should not be a winner!");
@@ -52,7 +52,7 @@ class WinnerCombatTest {
 
     @Test
     @DisplayName("n:n -> No winner(equal)")
-    void getWinner_n2n() {
+    void testGetWinner_n2n() {
         for (int n = 1; n < 100; n++) {
             when(mockedA.getVitality()).thenReturn(n);
             when(mockedB.getVitality()).thenReturn(n);
@@ -62,7 +62,7 @@ class WinnerCombatTest {
 
     @Test
     @DisplayName("m:n (m>n) -> A wins")
-    void getWinner_m2n_mGreater() {
+    void testGetWinner_m2n_mGreater() {
         for (int m = 1; m < 100; m++) {
             when(mockedA.getVitality()).thenReturn(m);
             for (int n = 0; n < m; n++) {
@@ -74,7 +74,7 @@ class WinnerCombatTest {
 
     @Test
     @DisplayName("n:m (m>n) -> B wins")
-    void getWinner_n2m_mGreater() {
+    void testGetWinner_n2m_mGreater() {
         for (int m = 1; m < 100; m++) {
             when(mockedB.getVitality()).thenReturn(m);
             for (int n = 0; n < m; n++) {

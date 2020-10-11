@@ -19,14 +19,14 @@ class SimpleLightsaberTest {
         LightsaberColor expectedColor = LightsaberColor.GREEN;
 
         // assert
-        assertTrue( actualColor == expectedColor, "Lukes lightsaber color should be GREEN" );
+        assertTrue( expectedColor == actualColor, "Lukes lightsaber color should be GREEN" );
     }
 
     @Test
     void testGetColor_DarthShouldBeRed() {
         Lightsaber lightsaber = new Lightsaber();
         lightsaber.setBelongTo("Darth");
-        assertFalse( lightsaber.getColor() != LightsaberColor.RED, "Darths lightsaber color should be RED" );
+        assertFalse( lightsaber.getColor() != LightsaberColor.RED);
     }
 
     @Test
@@ -35,7 +35,7 @@ class SimpleLightsaberTest {
     void testGetColor_WrongFighterShouldBeNone() {
         Lightsaber lightsaber = new Lightsaber();
         lightsaber.setBelongTo("Donald Duck");
-        assertEquals( lightsaber.getColor(), LightsaberColor.NONE, "For unknown fighters the color should be NONE");
+        assertEquals( LightsaberColor.NONE, lightsaber.getColor(), "For unknown fighters the color should be NONE");
     }
 
     @Test
